@@ -22,6 +22,8 @@ namespace CustomerRelationshipManager.Database
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            modelBuilder.Seed();
         }
 
         public DbSet<BusinessIndustry> Branches { get; set; }
