@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Models
 {
-    public class Branch
+    public class BusinessIndustry
     {
         public int ID { get; set; }
         [Required, MaxLength(50)]

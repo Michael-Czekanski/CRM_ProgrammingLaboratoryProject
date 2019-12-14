@@ -10,8 +10,8 @@ namespace CustomerRelationshipManager.Models
     public class Company
     {
         public int ID { get; set; }
-        [ForeignKey("Branch")]
-        public int BranchID { get; set; }
+        [ForeignKey("BusinessIndustry")]
+        public int BusinessIndustryID { get; set; }
         [ForeignKey("UserWhoAdded")]
         public int UserWhoAddedID { get; set; }
         [Required, MaxLength(50)]
@@ -27,7 +27,7 @@ namespace CustomerRelationshipManager.Models
         [Required]
         public bool IsDeleted { get; set; }
 
-        public Branch Branch { get; set; }
+        public BusinessIndustry BusinessIndustry { get; set; }
         public User UserWhoAdded { get; set; }
         public IEnumerable<BusinessNote> BusinessNotes { get; set; }
         public IEnumerable<ContactPerson> ContactPeople { get; set; }

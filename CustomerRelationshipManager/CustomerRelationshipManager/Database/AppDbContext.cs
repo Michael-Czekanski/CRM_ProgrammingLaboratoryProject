@@ -24,7 +24,7 @@ namespace CustomerRelationshipManager.Database
             }
         }
 
-        public DbSet<Branch> Branches { get; set; }
+        public DbSet<BusinessIndustry> Branches { get; set; }
         public DbSet<BusinessNote> BusinessNotes { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<ContactPerson> ContactPeople { get; set; }
