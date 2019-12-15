@@ -46,7 +46,7 @@ namespace CustomerRelationshipManager.DataRepositories
 
         public BusinessNote Get(int ID)
         {
-            return _context.BusinessNotes.FirstOrDefault(u => u.ID == ID);
+            return _context.BusinessNotes.FirstOrDefault(b => b.ID == ID);
         }
 
         public IEnumerable<BusinessNote> GetAll()

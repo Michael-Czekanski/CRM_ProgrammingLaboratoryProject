@@ -46,7 +46,7 @@ namespace CustomerRelationshipManager.DataRepositories
 
         public BusinessIndustry Get(int ID)
         {
-            return _context.BusinessIndustries.FirstOrDefault(u => u.ID == ID);
+            return _context.BusinessIndustries.FirstOrDefault(b => b.ID == ID);
         }
 
         public IEnumerable<BusinessIndustry> GetAll()
