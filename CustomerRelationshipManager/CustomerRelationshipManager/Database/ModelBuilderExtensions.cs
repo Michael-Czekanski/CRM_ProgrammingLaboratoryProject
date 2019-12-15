@@ -25,7 +25,7 @@ namespace CustomerRelationshipManager.Database
                 DateOfBirth = new DateTime(1990, 2, 23),
                 IsDeleted = false,
                 Login = "John123",
-                PasswordSHA256 = new string(Encoding.UTF8.GetString(SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("JohnPassword")))),
+                PasswordSHA256 = Encoding.UTF8.GetString(SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("JohnPassword"))),
                 RoleID = RoleEnum.Admin,
                 Surname = "Ross"
             });

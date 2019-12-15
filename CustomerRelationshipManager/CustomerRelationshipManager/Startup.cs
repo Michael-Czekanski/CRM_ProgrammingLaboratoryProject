@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CustomerRelationshipManager.Database;
+using CustomerRelationshipManager.DataRepositories;
+using CustomerRelationshipManager.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,7 @@ namespace CustomerRelationshipManager
             services.AddControllersWithViews();
             services.AddDbContextPool<AppDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("CRMDbConnection")));
+            services.AddScoped<IDataRepository<User>, SQLUserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
