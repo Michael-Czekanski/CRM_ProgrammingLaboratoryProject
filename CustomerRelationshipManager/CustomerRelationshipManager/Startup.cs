@@ -30,7 +30,9 @@ namespace CustomerRelationshipManager
             services.AddControllersWithViews();
             services.AddDbContextPool<AppDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("CRMDbConnection")));
+
             services.AddScoped<IDataRepository<User>, SQLUserRepository>();
+            services.AddScoped<IDataRepository<BusinessIndustry>, SQLBusinessIndustryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

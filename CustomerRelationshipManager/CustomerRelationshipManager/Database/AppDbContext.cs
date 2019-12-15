@@ -26,7 +26,7 @@ namespace CustomerRelationshipManager.Database
             modelBuilder.Seed();
         }
 
-        public DbSet<BusinessIndustry> Branches { get; set; }
+        public DbSet<BusinessIndustry> BusinessIndustries { get; set; }
         public DbSet<BusinessNote> BusinessNotes { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<ContactPerson> ContactPeople { get; set; }
