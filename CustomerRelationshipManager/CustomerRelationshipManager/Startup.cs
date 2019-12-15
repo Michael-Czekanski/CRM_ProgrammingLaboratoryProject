@@ -35,6 +35,7 @@ namespace CustomerRelationshipManager
             services.AddScoped<IDataRepository<BusinessIndustry>, SQLBusinessIndustryRepository>();
             services.AddScoped<IDataRepository<BusinessNote>, SQLBusinessNoteRepository>();
             services.AddScoped<IDataRepository<Company>, SQLCompanyRepository>();
+            services.AddScoped<IDataRepository<ContactPerson>, SQLContactPersonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
