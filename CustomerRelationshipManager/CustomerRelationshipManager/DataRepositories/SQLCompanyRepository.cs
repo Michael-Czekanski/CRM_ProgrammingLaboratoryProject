@@ -29,7 +29,8 @@ namespace CustomerRelationshipManager.DataRepositories
 
             if (company != null)
             {
-                _context.Remove(company);
+                company.IsDeleted = true;
+                Edit(company);
                 _context.SaveChanges();
             }
 

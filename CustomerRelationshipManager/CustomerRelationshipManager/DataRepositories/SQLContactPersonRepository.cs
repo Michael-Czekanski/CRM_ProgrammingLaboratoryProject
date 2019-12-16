@@ -29,7 +29,8 @@ namespace CustomerRelationshipManager.DataRepositories
 
             if (contactPerson != null)
             {
-                _context.Remove(contactPerson);
+                contactPerson.IsDeleted = true;
+                Edit(contactPerson);
                 _context.SaveChanges();
             }
 

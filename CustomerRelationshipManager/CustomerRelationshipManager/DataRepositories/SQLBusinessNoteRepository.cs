@@ -29,7 +29,8 @@ namespace CustomerRelationshipManager.DataRepositories
 
             if (businessNote != null)
             {
-                _context.Remove(businessNote);
+                businessNote.IsDeleted = true;
+                Edit(businessNote);
                 _context.SaveChanges();
             }
 

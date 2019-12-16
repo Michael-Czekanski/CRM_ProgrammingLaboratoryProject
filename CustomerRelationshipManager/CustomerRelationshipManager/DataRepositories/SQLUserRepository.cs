@@ -33,7 +33,8 @@ namespace CustomerRelationshipManager.DataRepositories
 
             if(user != null)
             {
-                _context.Remove(user);
+                user.IsDeleted = true;
+                Edit(user);
                 _context.SaveChanges();
             }
 
