@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.DataRepositories
@@ -18,6 +20,8 @@ namespace CustomerRelationshipManager.DataRepositories
         }
         public User Add(User newObject)
         {
+            newObject.PasswordSHA256 = Encoding.UTF8.GetString(
+                SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(newObject.PasswordSHA256)));
             _context.Users.Add(newObject);
             _context.SaveChanges();
             return newObject;
