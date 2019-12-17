@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
-    interface IDataRepository<T>
+    public interface IDataRepository<T>
     {
         IEnumerable<T> GetAll();
         T Get(int ID);
