@@ -17,6 +17,11 @@ namespace CustomerRelationshipManager.Controllers
             _userRepository = userRepository;
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToAction("All");
+        }
+
         public ViewResult All()
         {
             return View(_userRepository.GetAll());
