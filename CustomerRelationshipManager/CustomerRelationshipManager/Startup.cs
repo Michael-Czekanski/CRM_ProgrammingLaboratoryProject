@@ -31,7 +31,7 @@ namespace CustomerRelationshipManager
             services.AddDbContextPool<AppDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("CRMDbConnection")));
 
-            services.AddScoped<IDataRepository<User>, SQLUserRepository>();
+            services.AddScoped<IUserRepository, SQLUserRepository>();
             services.AddScoped<IDataRepository<BusinessIndustry>, SQLBusinessIndustryRepository>();
             services.AddScoped<IDataRepository<BusinessNote>, SQLBusinessNoteRepository>();
             services.AddScoped<IDataRepository<Company>, SQLCompanyRepository>();

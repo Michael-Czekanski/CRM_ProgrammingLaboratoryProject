@@ -1,5 +1,6 @@
 ﻿using CustomerRelationshipManager.Database;
 using CustomerRelationshipManager.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
-    public class SQLUserRepository : IDataRepository<User>
+    public class SQLUserRepository : IUserRepository
     {
         private readonly AppDbContext _context;
 
@@ -57,6 +58,19 @@ namespace CustomerRelationshipManager.DataRepositories
         public IEnumerable<User> GetAll()
         {
             return _context.Users;
+        }
+
+        public User GetAllAddedByUser(User user)
+        {
+            user.AddedCompanies = _context.Companies.Where(c => c.UserWhoAddedID == user.ID)
+                .Include(c => c.BusinessIndustry).ToList();
+            user.AddedContactPeople = _context.ContactPeople.Where(c => c.UserWhoAddedID == user.ID)
+                .Include(c => c.Company).ToList();
+            user.BusinessNotes = _context.BusinessNotes.Where(b => b.UserWhoAddedID == user.ID)
+                .Include(b => b.Company).ToList();
+
+            return user;
+
         }
     }
 }
