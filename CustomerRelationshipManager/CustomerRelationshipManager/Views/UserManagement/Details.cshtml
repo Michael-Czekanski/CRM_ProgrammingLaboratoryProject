@@ -1,0 +1,30 @@
+﻿@model User
+
+@{ 
+    ViewData["Title"] = "User Details";
+}
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Name</div>
+    <div class="col-sm-6 bg-light">@Model.Name</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Surname</div>
+    <div class="col-sm-6 bg-light">@Model.Surname</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Date of birth</div>
+    <div class="col-sm-6 bg-light">@Model.DateOfBirth</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Role</div>
+    <div class="col-sm-6 bg-light">@Model.RoleID</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Login</div>
+    <div class="col-sm-6 bg-light">@Model.Login</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Is deleted</div>
+    <div class="col-sm-6 bg-light">@Model.IsDeleted</div>
+</div>
