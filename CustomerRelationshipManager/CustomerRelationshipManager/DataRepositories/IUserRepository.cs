@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
-    interface IUserRepository: IDataRepository<User>
+    public interface IUserRepository: IDataRepository<User>
     {
         /// <summary>
         /// Gets all companies, contact people and business notes added by user.

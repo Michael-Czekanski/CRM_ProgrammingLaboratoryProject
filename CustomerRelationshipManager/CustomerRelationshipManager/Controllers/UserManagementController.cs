@@ -10,9 +10,9 @@ namespace CustomerRelationshipManager.Controllers
 {
     public class UserManagementController: Controller
     {
-        private IDataRepository<User> _userRepository;
+        private IUserRepository _userRepository;
 
-        public UserManagementController(IDataRepository<User> userRepository)
+        public UserManagementController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -29,7 +29,9 @@ namespace CustomerRelationshipManager.Controllers
 
         public ViewResult Details(int? ID)
         {
-            return View(_userRepository.Get(ID ?? 1));
+            User userWithEmptyNavProp = _userRepository.Get(ID ?? 1);
+            User userWithFilledNavProp = _userRepository.GetAllAddedByUser(userWithEmptyNavProp);
+            return View(userWithFilledNavProp);
         }
 
         [HttpGet]
