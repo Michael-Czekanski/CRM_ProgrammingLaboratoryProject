@@ -34,7 +34,7 @@ namespace CustomerRelationshipManager
             services.AddScoped<IUserRepository, SQLUserRepository>();
             services.AddScoped<IDataRepository<BusinessIndustry>, SQLBusinessIndustryRepository>();
             services.AddScoped<IDataRepository<BusinessNote>, SQLBusinessNoteRepository>();
-            services.AddScoped<IDataRepository<Company>, SQLCompanyRepository>();
+            services.AddScoped<ICompanyRepository, SQLCompanyRepository>();
             services.AddScoped<IDataRepository<ContactPerson>, SQLContactPersonRepository>();
         }
 
