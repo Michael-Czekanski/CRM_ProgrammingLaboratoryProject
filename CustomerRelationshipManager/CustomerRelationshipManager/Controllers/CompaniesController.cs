@@ -32,6 +32,24 @@ namespace CustomerRelationshipManager.Controllers
             return RedirectToAction("All");
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Company company)
+        {
+            if (ModelState.IsValid)
+            {
+                _companyRepository.Add(company);
+                return RedirectToAction("Details", new { ID = company.ID });
+            }
+
+            return View();
+        }
+
     }
     
 }
