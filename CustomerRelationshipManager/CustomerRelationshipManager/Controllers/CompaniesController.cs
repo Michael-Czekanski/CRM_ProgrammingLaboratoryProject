@@ -10,16 +10,21 @@ namespace CustomerRelationshipManager.Controllers
 {
     public class CompaniesController: Controller
     {
-        private IDataRepository<Company> _companyRepository;
+        private ICompanyRepository _companyRepository;
 
-        public CompaniesController(IDataRepository<Company> companyRepository)
+        public CompaniesController(ICompanyRepository companyRepository)
         {
             _companyRepository = companyRepository;
         }
 
         public IActionResult All()
         {
-            return View();
+            IEnumerable<Company> companies = _companyRepository.GetAll().ToList();
+            foreach(Company company in companies)
+            {
+                _companyRepository.FillBusinessIndustryNavProperty(company);
+            }
+            return View(companies);
         }
 
     }
