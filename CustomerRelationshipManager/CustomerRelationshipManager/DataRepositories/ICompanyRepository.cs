@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
-    interface ICompanyRepository: IDataRepository<Company>
+    public interface ICompanyRepository: IDataRepository<Company>
     {
         Company FillBusinessIndustryNavProperty(Company companyToFillWithData);
 
