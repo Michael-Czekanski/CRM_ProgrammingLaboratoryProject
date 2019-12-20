@@ -27,6 +27,11 @@ namespace CustomerRelationshipManager.Controllers
             return View(companies);
         }
 
+        public IActionResult Index()
+        {
+            return RedirectToAction("All");
+        }
+
     }
     
 }
