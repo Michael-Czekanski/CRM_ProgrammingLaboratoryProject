@@ -1,0 +1,54 @@
+﻿@model User
+
+    <form asp-controller="UserManagement" asp-action="Create" method="post">
+        <!-- Name -->
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Surname -->
+        <div>
+            <label asp-for="Surname"></label>
+            <input asp-for="Surname" />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+        <!-- DateOfBirth -->
+        <div>
+            <label asp-for="DateOfBirth"></label>
+            <input asp-for="DateOfBirth" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <!-- Login -->
+        <div>
+            <label asp-for="Login"></label>
+            <input asp-for="Login" />
+            <span asp-validation-for="Login" class="text-danger"></span>
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label asp-for="PasswordSHA256"></label>
+            <input asp-for="PasswordSHA256" />
+            <span asp-validation-for="PasswordSHA256" class="text-danger"></span>
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label asp-for="RoleID"></label>
+            <select asp-for="RoleID" asp-items="@Html.GetEnumSelectList<RoleEnum>()">
+                <option value="">Please select option</option>
+            </select>
+            <span asp-validation-for="RoleID" class="text-danger"></span>
+        </div>
+
+
+        <!-- Summary -->
+
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </form>

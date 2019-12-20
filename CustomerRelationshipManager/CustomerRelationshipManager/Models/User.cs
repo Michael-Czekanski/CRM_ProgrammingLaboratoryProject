@@ -10,8 +10,8 @@ namespace CustomerRelationshipManager.Models
     public class User
     {
         public int ID { get; set; }
-        [ForeignKey("Role"), Required]
-        public RoleEnum RoleID { get; set; }
+        [ForeignKey("Role"), Required, Display(Name="Role")]
+        public RoleEnum? RoleID { get; set; }
         [Required(ErrorMessage = "Name is required"), MaxLength(20), 
             RegularExpression("[A-Z][a-z]+", ErrorMessage = "Invalid name format")]
         public string Name { get; set; }
@@ -22,7 +22,7 @@ namespace CustomerRelationshipManager.Models
         public string Login { get; set; }
         [Required(ErrorMessage = "Password is required"), DataType(DataType.Password)]
         public string PasswordSHA256 { get; set; }
-        [Required(ErrorMessage = "Date of birth is required"), DataType(DataType.Date)]
+        [Required(ErrorMessage = "Date of birth is required"), DataType(DataType.Date), Display(Name="Date of birth")]
         public DateTime DateOfBirth { get; set; }
         [Required]
         public bool IsDeleted { get; set; }
