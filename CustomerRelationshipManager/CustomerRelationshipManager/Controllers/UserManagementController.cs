@@ -1,5 +1,6 @@
 ﻿using CustomerRelationshipManager.DataRepositories;
 using CustomerRelationshipManager.Models;
+using CustomerRelationshipManager.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -56,11 +57,19 @@ namespace CustomerRelationshipManager.Controllers
         public ViewResult Edit(int ID)
         {
             User user = _userRepository.Get(ID);
-            return View(user);
+            EditUserViewModel model = new EditUserViewModel()
+            {
+                ID = user.ID,
+                Name = user.Name,
+                Surname = user.Surname,
+                DateOfBirth = user.DateOfBirth,
+                RoleID = user.RoleID
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(User model)
+        public IActionResult Edit(EditUserViewModel model)
         {
             if(ModelState.IsValid)
             {
@@ -68,8 +77,6 @@ namespace CustomerRelationshipManager.Controllers
                 user.Name = model.Name;
                 user.Surname = model.Surname;
                 user.DateOfBirth = model.DateOfBirth;
-                user.Login = model.Login;
-                user.PasswordSHA256 = model.PasswordSHA256;
                 user.RoleID = model.RoleID;
 
                 _userRepository.Edit(user);
