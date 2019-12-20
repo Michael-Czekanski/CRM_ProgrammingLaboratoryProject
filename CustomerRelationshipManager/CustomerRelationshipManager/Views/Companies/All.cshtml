@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Company>
+
+@{
+    ViewData["Title"] = "All Companies";
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>BusinessIndustry</th>
+        <th>NIP</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Date Added</th>
+        <th>Operations</th>
+    </tr>
+
+    @foreach (Company company in Model)
+    {
+        <tr>
+            <td>@company.ID</td>
+            <td>@company.Name</td>
+            <td>@company.BusinessIndustry</td>
+            <td>@company.NIP</td>
+            <td>@company.City</td>
+            <td>@company.Address</td>
+            <td>@company.DateAdded</td>
+            <td>
+                <a asp-controller="UserManagement" asp-action="Details" asp-route-ID="@company.ID" class="btn btn-primary">Details</a>
+                <a asp-controller="UserManagement" asp-action="Edit" asp-route-ID="@company.ID" class="btn btn-primary">Edit</a>
+                <a asp-controller="UserManagement" asp-action="Delete" asp-route-ID="@company.ID" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
