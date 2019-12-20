@@ -17,6 +17,11 @@ namespace CustomerRelationshipManager.Controllers
             _companyRepository = companyRepository;
         }
 
+        public IActionResult All()
+        {
+            return View();
+        }
+
     }
     
 }
