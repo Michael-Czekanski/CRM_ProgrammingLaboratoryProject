@@ -1,5 +1,6 @@
 ﻿using CustomerRelationshipManager.DataRepositories;
 using CustomerRelationshipManager.Models;
+using CustomerRelationshipManager.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,13 @@ namespace CustomerRelationshipManager.Controllers
     public class CompaniesController: Controller
     {
         private ICompanyRepository _companyRepository;
+        private IDataRepository<BusinessIndustry> _businessIndustryRepository;
 
-        public CompaniesController(ICompanyRepository companyRepository)
+        public CompaniesController(ICompanyRepository companyRepository, 
+            IDataRepository<BusinessIndustry> businessIndustryRepository)
         {
             _companyRepository = companyRepository;
+            _businessIndustryRepository = businessIndustryRepository;
         }
 
         public IActionResult All()
@@ -35,19 +39,23 @@ namespace CustomerRelationshipManager.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            CreateCompanyViewModel model = new CreateCompanyViewModel()
+            {
+                BusinessIndustries = _businessIndustryRepository.GetAll().ToList()
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Create(Company company)
+        public IActionResult Create(CreateCompanyViewModel createCompanyViewModel)
         {
             if (ModelState.IsValid)
             {
-                _companyRepository.Add(company);
-                return RedirectToAction("Details", new { ID = company.ID });
+                _companyRepository.Add(createCompanyViewModel);
+                return RedirectToAction("Details", new { ID = createCompanyViewModel.ID });
             }
-
-            return View();
+            createCompanyViewModel.BusinessIndustries = _businessIndustryRepository.GetAll().ToList();
+            return View(createCompanyViewModel);
         }
 
     }

@@ -10,7 +10,7 @@ namespace CustomerRelationshipManager.Models
     public class Company
     {
         public int ID { get; set; }
-        [ForeignKey("BusinessIndustry")]
+        [ForeignKey("BusinessIndustry"), Display(Name="Business Industry")]
         public int BusinessIndustryID { get; set; }
         [ForeignKey("UserWhoAdded")]
         public int UserWhoAddedID { get; set; }
