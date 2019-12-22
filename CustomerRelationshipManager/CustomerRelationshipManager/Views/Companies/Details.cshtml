@@ -1,0 +1,88 @@
+﻿@model Company
+
+@{
+    ViewData["Title"] = "Company Details";
+}
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Name</div>
+    <div class="col-sm-6 bg-light">@Model.Name</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Business industry</div>
+    <div class="col-sm-6 bg-light">@Model.BusinessIndustry.Name</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">NIP</div>
+    <div class="col-sm-6 bg-light">@Model.NIP</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Address</div>
+    <div class="col-sm-6 bg-light">@Model.Address</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">City</div>
+    <div class="col-sm-6 bg-light">@Model.City</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Date added</div>
+    <div class="col-sm-6 bg-light">@Model.DateAdded</div>
+</div>
+
+
+<!-- All business notes -->
+<div class="row">
+    <button type="button" class="col-sm-12 btn-block btn-light text-secondary text-left"
+            data-toggle="collapse" data-target="#BusinessNotes">
+        Business Notes (Click)
+    </button>
+</div>
+
+<div class="collapse" id="BusinessNotes">
+    <table class="table table-hover table-secondary">
+        <tr>
+            <th>ID</th>
+            <th>Content</th>
+        </tr>
+
+        @foreach (BusinessNote businessNote in Model.BusinessNotes)
+        {
+            <tr>
+                <td>@businessNote.ID</td>
+                <td>@businessNote.Content</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- All contact people-->
+
+<div class="row">
+    <button type="button" class="col-sm-12 btn-block btn-light text-secondary text-left"
+            data-toggle="collapse" data-target="#ContactPeople">
+        Contact People (Click)
+    </button>
+</div>
+
+<div class="collapse" id="ContactPeople">
+    <table class="table table-hover table-secondary">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Phone Number</th>
+            <th>Company</th>
+        </tr>
+
+        @foreach (ContactPerson contactPerson in Model.ContactPeople)
+        {
+            <tr>
+                <td>@contactPerson.ID</td>
+                <td>@contactPerson.Name</td>
+                <td>@contactPerson.Surname</td>
+                <td>@contactPerson.TelephoneNum</td>
+                <td>@contactPerson.Company.Name</td>
+            </tr>
+        }
+    </table>
+</div>
