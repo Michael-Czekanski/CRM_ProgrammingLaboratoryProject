@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.ViewModels
 {
-    public class CreateCompanyViewModel: Company
+    public class CreateCompanyViewModel : Company
     {
         public IEnumerable<BusinessIndustry> BusinessIndustries { get; set; }
     }
