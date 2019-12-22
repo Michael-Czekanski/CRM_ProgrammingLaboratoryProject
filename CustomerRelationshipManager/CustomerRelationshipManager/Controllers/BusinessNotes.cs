@@ -31,5 +31,12 @@ namespace CustomerRelationshipManager.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Details(int ID)
+        {
+            BusinessNote model = _businessNoteRepository.Get(ID);
+            _businessNoteRepository.FillCompanyNavProperty(model);
+            return View(model);
+        }
     }
 }

@@ -1,0 +1,27 @@
+﻿@model BusinessNote
+
+@{
+    ViewData["Title"] = "Business note details";
+}
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">ID</div>
+    <div class="col-sm-6 bg-light">@Model.ID</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Content</div>
+    <div class="col-sm-6 bg-light">@Model.Content</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Company Name</div>
+    <div class="col-sm-6 bg-light">
+        <span>@Model.Company.Name</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Company Details</div>
+    <div class="col-sm-6 bg-light">
+        <a asp-controller="companies" asp-action="details" asp-route-ID="@Model.CompanyID" class="btn btn-light btn-block">Company details</a>
+    </div>
+</div>
