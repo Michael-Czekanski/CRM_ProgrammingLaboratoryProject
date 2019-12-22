@@ -70,5 +70,12 @@ namespace CustomerRelationshipManager.Controllers
 
             return View(businessNote);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int ID)
+        {
+            BusinessNote model = _businessNoteRepository.Get(ID);
+            return View(model);
+        }
     }
 }
