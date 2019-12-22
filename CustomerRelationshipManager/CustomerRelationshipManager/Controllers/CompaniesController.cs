@@ -68,6 +68,12 @@ namespace CustomerRelationshipManager.Controllers
             return View(createCompanyViewModel);
         }
 
+        public IActionResult Details(int ID)
+        {
+            Company company = _companyRepository.Get(ID);
+            return View(company);
+        }
+
     }
     
 }
