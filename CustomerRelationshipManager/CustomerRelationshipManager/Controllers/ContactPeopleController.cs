@@ -56,9 +56,26 @@ namespace CustomerRelationshipManager.Controllers
                 userWhoAddedID = BitConverter.ToInt32(userWhoAddedIDBytes, 0);
                 model.UserWhoAddedID = userWhoAddedID;
             }
+            else
+            {
+                return RedirectToAction("signin", "home");
+            }
 
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult Create(ContactPerson model)
+        {
+            if(ModelState.IsValid)
+            {
+                _contactPersonRepository.Add(model);
+                return RedirectToAction("details", new { ID = model.ID });
+            }
+
+            return View(model);
+        }
+       
 
         
     }
