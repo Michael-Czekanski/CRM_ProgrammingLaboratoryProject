@@ -45,6 +45,14 @@ namespace CustomerRelationshipManager.Controllers
             {
                 BusinessIndustries = _businessIndustryRepository.GetAll().ToList()
             };
+
+            byte[] userWhoAddedIDBytes;
+            int userWhoAddedID;
+            if (HttpContext.Session.TryGetValue("UserID", out userWhoAddedIDBytes))
+            {
+                userWhoAddedID = BitConverter.ToInt32(userWhoAddedIDBytes, 0);
+                model.UserWhoAddedID = userWhoAddedID;
+            }
             return View(model);
         }
 
