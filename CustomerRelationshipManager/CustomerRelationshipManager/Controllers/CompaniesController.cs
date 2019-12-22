@@ -97,6 +97,23 @@ namespace CustomerRelationshipManager.Controllers
             };
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult Edit(CreateOrEditCompanyViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Company company = _companyRepository.Get(model.ID);
+                company.Name = model.Name;
+                company.BusinessIndustryID = model.BusinessIndustryID;
+                company.Address = model.Address;
+                company.City = model.City;
+                company.NIP = model.NIP;
+                _companyRepository.Edit(company);
+                return RedirectToAction("all");
+            }
+            return View(model);
+        }
     }
     
 }
