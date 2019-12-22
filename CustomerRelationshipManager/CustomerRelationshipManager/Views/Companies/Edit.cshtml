@@ -1,0 +1,61 @@
+﻿@model CreateOrEditCompanyViewModel
+
+@{ 
+    ViewData["Title"] = "Edit company";
+}
+
+    <form asp-controller="companies" asp-action="edit" method="post">
+        <input hidden asp-for="ID" />
+        <input hidden asp-for="BusinessIndustries" />
+        <input hidden asp-for="UserWhoAddedID" />
+        <input hidden asp-for="DateAdded" />
+        <input hidden asp-for="IsDeleted" />
+
+        <!-- Name -->
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Business Industry -->
+        <div>
+            <label asp-for="BusinessIndustryID"></label>
+            <select asp-for="BusinessIndustryID">
+                <option value="">Please select</option>
+                @foreach (BusinessIndustry businessIndustry in Model.BusinessIndustries)
+                {
+                    <option value="@businessIndustry.ID">@businessIndustry.Name</option>
+                }
+            </select>
+            <span asp-validation-for="BusinessIndustryID" class="text-danger"></span>
+        </div>
+
+        <!-- Address -->
+        <div>
+            <label asp-for="Address"></label>
+            <input asp-for="Address" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <!-- City -->
+        <div>
+            <label asp-for="City"></label>
+            <input asp-for="City" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+
+        <!-- NIP -->
+        <div>
+            <label asp-for="NIP"></label>
+            <input asp-for="NIP" />
+            <span asp-validation-for="NIP" class="text-danger"></span>
+        </div>
+
+        <!-- Summary -->
+
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+    </form>
