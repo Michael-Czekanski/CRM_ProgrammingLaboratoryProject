@@ -1,0 +1,50 @@
+﻿@model ContactPerson
+
+@{
+    ViewData["Title"] = "Contact person details";
+}
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">ID</div>
+    <div class="col-sm-6 bg-light">@Model.ID</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Name</div>
+    <div class="col-sm-6 bg-light">@Model.Name</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Surname</div>
+    <div class="col-sm-6 bg-light">@Model.Surname</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Email</div>
+    <div class="col-sm-6 bg-light">@Model.Email</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Phone number</div>
+    <div class="col-sm-6 bg-light">@Model.TelephoneNum</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Position</div>
+    <div class="col-sm-6 bg-light">@Model.Position</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Company</div>
+    <div class="col-sm-6 p-0">
+        <a class="btn btn-block btn-light text-left"
+           asp-controller="companies" asp-action="details" asp-route-ID="@Model.CompanyID">
+            @Model.Company.Name (Click for details)
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">User who added</div>
+    <div class="col-sm-6 p-0">
+        <a class="btn btn-block btn-light text-left"
+           asp-controller="usermanagement" asp-action="details" asp-route-ID="@Model.UserWhoAddedID">
+            User who added (Click for details)
+        </a>
+    </div>
+</div>

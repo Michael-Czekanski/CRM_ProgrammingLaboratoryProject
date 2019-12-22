@@ -31,6 +31,14 @@ namespace CustomerRelationshipManager.Controllers
             }
             return View(model);
         }
+
+
+        public IActionResult Details(int ID)
+        {
+            ContactPerson model = _contactPersonRepository.Get(ID);
+            _contactPersonRepository.FillCompanyNavProperty(model);
+            return View(model);
+        }
         
     }
 }
