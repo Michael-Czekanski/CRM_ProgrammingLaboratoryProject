@@ -61,6 +61,7 @@ namespace CustomerRelationshipManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                createCompanyViewModel.DateAdded = DateTime.Now;
                 _companyRepository.Add(createCompanyViewModel);
                 return RedirectToAction("Details", new { ID = createCompanyViewModel.ID });
             }
