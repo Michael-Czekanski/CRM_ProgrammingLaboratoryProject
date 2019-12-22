@@ -42,6 +42,10 @@ namespace CustomerRelationshipManager.Controllers
         [HttpGet]
         public IActionResult Create(int CompanyID)
         {
+            if (CompanyID <= 0)
+            {
+                return RedirectToAction("all", "companies");
+            }
             BusinessNote model = new BusinessNote();
             model.CompanyID = CompanyID;
             byte[] userWhoAddedIDBytes;
