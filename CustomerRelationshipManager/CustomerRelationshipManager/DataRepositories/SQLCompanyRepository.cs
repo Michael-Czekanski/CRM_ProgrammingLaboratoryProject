@@ -56,7 +56,7 @@ namespace CustomerRelationshipManager.DataRepositories
         public Company FillBusinessNotesNavProperty(Company companyToFillWithData)
         {
             companyToFillWithData.BusinessNotes = _context.BusinessNotes
-                .Where(b => b.CompanyID == companyToFillWithData.ID);
+                .Where(b => b.CompanyID == companyToFillWithData.ID).ToList();
 
             return companyToFillWithData;
         }
@@ -64,7 +64,7 @@ namespace CustomerRelationshipManager.DataRepositories
         public Company FillContactPeopleNavProperty(Company companyToFillWithData)
         {
             companyToFillWithData.ContactPeople = _context.ContactPeople
-                .Where(c => c.CompanyID == companyToFillWithData.ID);
+                .Where(c => c.CompanyID == companyToFillWithData.ID).ToList();
 
             return companyToFillWithData;
         }
