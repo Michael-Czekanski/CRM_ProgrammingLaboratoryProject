@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
-    public class SQLBusinessNoteRepository : IDataRepository<BusinessNote>
+    public class SQLBusinessNoteRepository : IBusinessNoteRepository
     {
         private readonly AppDbContext _context;
 
@@ -43,6 +43,12 @@ namespace CustomerRelationshipManager.DataRepositories
             businessNote.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
             return newData;
+        }
+
+        public BusinessNote FillCompanyNavProperty(BusinessNote businessNoteToFillWithData)
+        {
+            businessNoteToFillWithData.Company = _context.Companies.FirstOrDefault(c => c.ID == businessNoteToFillWithData.CompanyID);
+            return businessNoteToFillWithData;
         }
 
         public BusinessNote Get(int ID)
