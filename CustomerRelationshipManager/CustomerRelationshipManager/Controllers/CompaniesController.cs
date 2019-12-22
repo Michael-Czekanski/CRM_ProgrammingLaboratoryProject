@@ -41,7 +41,7 @@ namespace CustomerRelationshipManager.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            CreateCompanyViewModel model = new CreateCompanyViewModel()
+            CreateOrEditCompanyViewModel model = new CreateOrEditCompanyViewModel()
             {
                 BusinessIndustries = _businessIndustryRepository.GetAll().ToList()
             };
@@ -57,7 +57,7 @@ namespace CustomerRelationshipManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateCompanyViewModel createCompanyViewModel)
+        public IActionResult Create(CreateOrEditCompanyViewModel createCompanyViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +77,26 @@ namespace CustomerRelationshipManager.Controllers
             return View(company);
         }
 
+        [HttpGet]
+        public IActionResult Edit(int ID)
+        {
+            Company company = _companyRepository.Get(ID);
+            CreateOrEditCompanyViewModel model = new CreateOrEditCompanyViewModel()
+            {
+                ID = company.ID,
+                Address = company.Address,
+                BusinessIndustryID = company.BusinessIndustryID,
+                City = company.City,
+                DateAdded = company.DateAdded,
+                IsDeleted = company.IsDeleted,
+                Name = company.Name,
+                NIP = company.NIP,
+                UserWhoAddedID = company.UserWhoAddedID,
+                BusinessIndustries = _businessIndustryRepository.GetAll().ToList()
+
+            };
+            return View(model);
+        }
     }
     
 }
