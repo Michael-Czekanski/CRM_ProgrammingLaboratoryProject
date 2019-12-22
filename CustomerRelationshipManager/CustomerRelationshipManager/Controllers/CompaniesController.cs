@@ -71,6 +71,7 @@ namespace CustomerRelationshipManager.Controllers
         public IActionResult Details(int ID)
         {
             Company company = _companyRepository.Get(ID);
+            _companyRepository.FillBusinessIndustryNavProperty(company);
             return View(company);
         }
 
