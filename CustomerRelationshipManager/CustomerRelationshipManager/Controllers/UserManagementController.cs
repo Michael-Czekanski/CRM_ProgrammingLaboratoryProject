@@ -1,6 +1,7 @@
 ﻿using CustomerRelationshipManager.DataRepositories;
 using CustomerRelationshipManager.Models;
 using CustomerRelationshipManager.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Controllers
 {
+    [Authorize]
     public class UserManagementController: Controller
     {
         private IUserRepository _userRepository;
@@ -17,6 +19,8 @@ namespace CustomerRelationshipManager.Controllers
         {
             _userRepository = userRepository;
         }
+
+        
 
         public IActionResult Index()
         {

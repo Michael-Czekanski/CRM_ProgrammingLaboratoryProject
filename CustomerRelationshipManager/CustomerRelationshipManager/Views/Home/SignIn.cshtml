@@ -1,5 +1,18 @@
 ﻿@model UserSignInViewModel
 
+@{
+    ViewData["Title"] = "Sign in";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>You are logged in</h2>
+    <div>
+        <a asp-controller="home" asp-action="index" class="btn btn-primary">Return</a>
+    </div>
+}
+else
+{
     <form asp-controller="home" asp-action="signin" method="post">
         <div>
             <label asp-for="Login"></label>
@@ -18,3 +31,4 @@
             <button class="btn btn-primary" type="submit">Sign In</button>
         </div>
     </form>
+}
