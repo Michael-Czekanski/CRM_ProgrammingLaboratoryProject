@@ -6,8 +6,10 @@
 }
 
 <form method="post" asp-controller="businessnotes" asp-action="edit">
+    <input hidden asp-for="ID" />
     <input hidden asp-for="CompanyID" />
     <input hidden asp-for="UserWhoAddedID" />
+    <input hidden asp-for="IsDeleted" />
 
     <div>
         <label asp-for="Content"></label>
