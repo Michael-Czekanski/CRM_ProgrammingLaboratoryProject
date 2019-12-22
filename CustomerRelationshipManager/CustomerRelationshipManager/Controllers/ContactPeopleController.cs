@@ -39,6 +39,27 @@ namespace CustomerRelationshipManager.Controllers
             _contactPersonRepository.FillCompanyNavProperty(model);
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Create(int CompanyID)
+        {
+            if(CompanyID <= 0)
+            {
+                return RedirectToAction("all", "companies");
+            }
+            ContactPerson model = new ContactPerson();
+            model.CompanyID = CompanyID;
+            byte[] userWhoAddedIDBytes;
+            int userWhoAddedID;
+            if (HttpContext.Session.TryGetValue("UserID", out userWhoAddedIDBytes))
+            {
+                userWhoAddedID = BitConverter.ToInt32(userWhoAddedIDBytes, 0);
+                model.UserWhoAddedID = userWhoAddedID;
+            }
+
+            return View(model);
+        }
+
         
     }
 }
