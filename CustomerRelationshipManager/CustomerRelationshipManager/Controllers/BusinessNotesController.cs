@@ -38,5 +38,21 @@ namespace CustomerRelationshipManager.Controllers
             _businessNoteRepository.FillCompanyNavProperty(model);
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Create(int CompanyID)
+        {
+            BusinessNote model = new BusinessNote();
+            model.CompanyID = CompanyID;
+            byte[] userWhoAddedIDBytes;
+            int userWhoAddedID;
+            if (HttpContext.Session.TryGetValue("UserID", out userWhoAddedIDBytes))
+            {
+                userWhoAddedID = BitConverter.ToInt32(userWhoAddedIDBytes, 0);
+                model.UserWhoAddedID = userWhoAddedID;
+            }
+
+            return View(model);
+        }
     }
 }
