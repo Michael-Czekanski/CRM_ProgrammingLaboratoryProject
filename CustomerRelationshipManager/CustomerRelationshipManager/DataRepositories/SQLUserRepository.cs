@@ -1,13 +1,12 @@
 ﻿using CustomerRelationshipManager.Database;
+using CustomerRelationshipManager.Helpers;
 using CustomerRelationshipManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
@@ -26,6 +25,19 @@ namespace CustomerRelationshipManager.DataRepositories
             _context.Users.Add(newObject);
             _context.SaveChanges();
             return newObject;
+        }
+
+        public User Authenticate(string login, string password)
+        {
+            User user = _context.Users.FirstOrDefault(u => u.Login == login
+            && u.PasswordSHA256 == UserManagementHelper.HashPasswordSHA256(password));
+
+            if(user == null)
+            {
+                return null;
+            }
+
+            return user;
         }
 
         public User Delete(int ID)

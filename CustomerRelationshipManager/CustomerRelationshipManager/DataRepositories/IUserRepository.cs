@@ -15,5 +15,7 @@ namespace CustomerRelationshipManager.DataRepositories
         /// <param name="user"></param>
         /// <returns></returns>
         User GetAllAddedByUser(User user);
+
+        User Authenticate(string login, string password);
     }
 }
