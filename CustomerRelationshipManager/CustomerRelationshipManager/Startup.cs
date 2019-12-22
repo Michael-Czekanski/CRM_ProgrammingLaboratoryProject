@@ -41,7 +41,7 @@ namespace CustomerRelationshipManager
             services.AddScoped<IDataRepository<BusinessIndustry>, SQLBusinessIndustryRepository>();
             services.AddScoped<IBusinessNoteRepository, SQLBusinessNoteRepository>();
             services.AddScoped<ICompanyRepository, SQLCompanyRepository>();
-            services.AddScoped<IDataRepository<ContactPerson>, SQLContactPersonRepository>();
+            services.AddScoped<IContactPersonRepository, SQLContactPersonRepository>();
             services.AddSingleton<ITokenProvider, TokenProvider>();
 
             IConfiguration appSettingsSection = Configuration.GetSection("AppSettings");

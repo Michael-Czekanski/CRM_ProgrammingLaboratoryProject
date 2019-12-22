@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CustomerRelationshipManager.DataRepositories
 {
-    public class SQLContactPersonRepository: IDataRepository<ContactPerson>
+    public class SQLContactPersonRepository: IContactPersonRepository
     {
         private readonly AppDbContext _context;
 
@@ -43,6 +43,12 @@ namespace CustomerRelationshipManager.DataRepositories
             contactPerson.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
             return newData;
+        }
+
+        public ContactPerson FillCompanyNavProperty(ContactPerson contactPersonToFillWithData)
+        {
+            contactPersonToFillWithData.Company = _context.Companies.FirstOrDefault(c => c.ID == contactPersonToFillWithData.CompanyID);
+            return contactPersonToFillWithData;
         }
 
         public ContactPerson Get(int ID)
