@@ -90,7 +90,12 @@
 <!-- Create business note -->
 
 <div class="row">
-    <a asp-controller="BusinessNotes" asp-action="Create" asp-route-CompanyID="@Model.ID" class="col-sm-12 btn-block btn-light text-secondary text-left">
+    <a asp-controller="BusinessNotes" asp-action="Create" asp-route-CompanyID="@Model.ID" 
+       class="col-sm-12 btn-block btn-light text-secondary text-left">
         Create Business Note (Click)
+    </a>
+    <a asp-controller="ContactPeople" asp-action="Create" asp-route-CompanyID="@Model.ID" 
+       class="col-sm-12 btn-block btn-light text-secondary text-left">
+        Add contact person
     </a>
 </div>
