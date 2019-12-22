@@ -115,6 +115,14 @@ namespace CustomerRelationshipManager.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Delete(int ID)
+        {
+            Company companyToDelete = _companyRepository.Get(ID);
+            companyToDelete.IsDeleted = true;
+            _companyRepository.Edit(companyToDelete);
+            return RedirectToAction("all");
+        }
     }
     
 }
