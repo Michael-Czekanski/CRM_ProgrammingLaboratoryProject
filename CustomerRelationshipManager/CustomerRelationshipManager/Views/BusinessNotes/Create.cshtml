@@ -1,0 +1,18 @@
+﻿@model BusinessNote
+
+@{ 
+    ViewData["Title"] = "Create business note";
+}
+
+<form method="post" asp-controller="businessnotes" asp-action="create">
+    <input hidden asp-for="CompanyID" />
+    <input hidden asp-for="UserWhoAddedID" />
+
+    <div>
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" ></textarea>
+        <span asp-validation-for="Content"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
