@@ -51,6 +51,7 @@ namespace CustomerRelationshipManager.Controllers
                 }
                 string token = tokenProvider.ProvideToken(user);
                 HttpContext.Session.Set("JWT", Encoding.ASCII.GetBytes(token));
+                HttpContext.Session.Set("UserID", BitConverter.GetBytes(user.ID)); 
                 return RedirectToAction("Index");
             }
 
