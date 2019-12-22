@@ -77,5 +77,18 @@ namespace CustomerRelationshipManager.Controllers
             BusinessNote model = _businessNoteRepository.Get(ID);
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult Edit(BusinessNote businessNote)
+        {
+            if(ModelState.IsValid)
+            {
+                _businessNoteRepository.Edit(businessNote);
+                return RedirectToAction("all");
+            }
+
+            return View(businessNote);
+        }
+
     }
 }
