@@ -4,34 +4,34 @@
     ViewData["Title"] = "Create contact person";
 }
 
-    <form method="post" asp-controller="conctactpeople" asp-action="create">
+    <form method="post" asp-controller="contactpeople" asp-action="create">
         <input hidden asp-for="CompanyID" />
         <input hidden asp-for="UserWhoAddedID" />
 
         <div>
             <label asp-for="Name"></label>
             <input asp-for="Name" />
-            <span asp-validation-for="Name"></span>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Surname"></label>
             <input asp-for="Surname" />
-            <span asp-validation-for="Surname"></span>
+            <span asp-validation-for="Surname" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Email"></label>
             <input asp-for="Email" />
-            <span asp-validation-for="Email"></span>
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="TelephoneNum"></label>
             <input asp-for="TelephoneNum" />
-            <span asp-validation-for="TelephoneNum"></span>
+            <span asp-validation-for="TelephoneNum" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Position"></label>
             <input asp-for="Position" />
-            <span asp-validation-for="Position"></span>
+            <span asp-validation-for="Position" class="text-danger"></span>
         </div>
 
 
