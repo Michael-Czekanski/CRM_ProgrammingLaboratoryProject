@@ -16,5 +16,20 @@ namespace CustomerRelationshipManager.Controllers
         {
             _businessNoteRepository = businessNoteRepository;
         }
+
+        public IActionResult Index()
+        {
+            return RedirectToAction("all");
+        }
+
+        public IActionResult All()
+        {
+            IEnumerable <BusinessNote> model = _businessNoteRepository.GetAll().ToList();
+            foreach(BusinessNote businessNote in model)
+            {
+                _businessNoteRepository.FillCompanyNavProperty(businessNote);
+            }
+            return View(model);
+        }
     }
 }

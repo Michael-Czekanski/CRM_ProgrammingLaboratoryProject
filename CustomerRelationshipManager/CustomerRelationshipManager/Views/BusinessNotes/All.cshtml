@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BusinessNote>
+
+@{ 
+    ViewData["Title"] = "All business notes";
+}
+
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Content</th>
+            <th>Company ID</th>
+            <th>Company Name</th>
+            <th>Operations</th>
+        </tr>
+
+        @foreach (BusinessNote businessNote in Model)
+        {
+            <tr>
+                <td>@businessNote.ID</td>
+                <td>@businessNote.Content</td>
+                <td>@businessNote.Company.ID</td>
+                <td>@businessNote.Company.Name</td>
+                <td>
+                    <a asp-controller="BusinessNotes" asp-action="Details" asp-route-ID="@businessNote.ID" class="btn btn-primary">Details</a>
+                    <a asp-controller="BusinessNotes" asp-action="Edit" asp-route-ID="@businessNote.ID" class="btn btn-primary">Edit</a>
+                    <a asp-controller="BusinessNotes" asp-action="Delete" asp-route-ID="@businessNote.ID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
