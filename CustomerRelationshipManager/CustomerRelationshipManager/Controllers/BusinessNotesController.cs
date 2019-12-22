@@ -90,5 +90,13 @@ namespace CustomerRelationshipManager.Controllers
             return View(businessNote);
         }
 
+        public IActionResult Delete(int ID)
+        {
+            BusinessNote businessNoteToDelete = _businessNoteRepository.Get(ID);
+            businessNoteToDelete.IsDeleted = true;
+            _businessNoteRepository.Edit(businessNoteToDelete);
+            return RedirectToAction("all");
+        }
+
     }
 }
