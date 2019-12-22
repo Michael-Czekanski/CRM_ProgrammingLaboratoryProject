@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ContactPerson>
+
+@{
+    ViewData["Title"] = "All contact people";
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Phone number</th>
+        <th>Company Name</th>
+        <th>Position</th>
+        <th>Operations</th>
+    </tr>
+
+    @foreach (ContactPerson contactPerson in Model)
+    {
+        <tr>
+            <td>@contactPerson.ID</td>
+            <td>@contactPerson.Name</td>
+            <td>@contactPerson.Surname</td>
+            <td>@contactPerson.Email</td>
+            <td>@contactPerson.TelephoneNum</td>
+            <td>@contactPerson.Company.Name</td>
+            <td>@contactPerson.Position</td>
+            <td>
+                <a asp-controller="ContactPeople" asp-action="Details" asp-route-ID="@contactPerson.ID" class="btn btn-primary">Details</a>
+                <a asp-controller="ContactPeople" asp-action="Edit" asp-route-ID="@contactPerson.ID" class="btn btn-primary">Edit</a>
+                <a asp-controller="ContactPeople" asp-action="Delete" asp-route-ID="@contactPerson.ID" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
