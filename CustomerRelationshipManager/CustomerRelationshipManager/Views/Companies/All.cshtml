@@ -27,9 +27,9 @@
             <td>@company.Address</td>
             <td>@company.DateAdded</td>
             <td>
-                <a asp-controller="UserManagement" asp-action="Details" asp-route-ID="@company.ID" class="btn btn-primary">Details</a>
-                <a asp-controller="UserManagement" asp-action="Edit" asp-route-ID="@company.ID" class="btn btn-primary">Edit</a>
-                <a asp-controller="UserManagement" asp-action="Delete" asp-route-ID="@company.ID" class="btn btn-danger">Delete</a>
+                <a asp-controller="Companies" asp-action="Details" asp-route-ID="@company.ID" class="btn btn-primary">Details</a>
+                <a asp-controller="Companies" asp-action="Edit" asp-route-ID="@company.ID" class="btn btn-primary">Edit</a>
+                <a asp-controller="Companies" asp-action="Delete" asp-route-ID="@company.ID" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     }
