@@ -30,6 +30,46 @@ namespace CustomerRelationshipManager.Database
                 Surname = "Ross"
             });
 
+            modelBuilder.Entity<BusinessIndustry>().HasData(new BusinessIndustry()
+            {
+                ID = 1,
+                Name = "IT"
+            });
+
+            modelBuilder.Entity<Company>().HasData(new Company()
+            {
+                ID = 1,
+                Name = "Sample Company",
+                BusinessIndustryID = 1,
+                Address = "Sample Address",
+                City = "Sample City",
+                UserWhoAddedID = 1,
+                NIP = "1234567890",
+                DateAdded = DateTime.Now,
+                IsDeleted = false
+            });
+
+            modelBuilder.Entity<ContactPerson>().HasData(new ContactPerson()
+            {
+                ID = 1,
+                CompanyID = 1,
+                UserWhoAddedID = 1,
+                Name = "Bob",
+                Surname = "John",
+                Email = "bob.john@fmail.com",
+                Position = "Sample",
+                TelephoneNum = "123456789",
+                IsDeleted = false
+            });
+
+            modelBuilder.Entity<BusinessNote>().HasData(new BusinessNote()
+            {
+                ID = 1,
+                Content = "Sample business note",
+                CompanyID = 1,
+                UserWhoAddedID = 1,
+                IsDeleted = false
+            });
         }
     }
 }
