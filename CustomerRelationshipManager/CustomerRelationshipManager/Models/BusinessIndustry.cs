@@ -30,7 +30,7 @@ namespace CustomerRelationshipManager.Models
     }
     public class BusinessIndustry
     {
-        public int ID { get; set; }
+        public BusinessIndustryEnum ID { get; set; }
         [Required, MaxLength(50)]
         public string Name { get; set; }
 
