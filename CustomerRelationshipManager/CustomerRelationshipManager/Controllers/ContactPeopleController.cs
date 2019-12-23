@@ -83,5 +83,17 @@ namespace CustomerRelationshipManager.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Edit(ContactPerson model)
+        {
+            if(ModelState.IsValid)
+            {
+                _contactPersonRepository.Edit(model);
+                return RedirectToAction("all");
+            }
+
+            return View(model);
+        }
+
     }
 }
