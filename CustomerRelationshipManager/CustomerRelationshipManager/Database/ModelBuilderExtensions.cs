@@ -41,7 +41,7 @@ namespace CustomerRelationshipManager.Database
             {
                 ID = 1,
                 Name = "Sample Company",
-                BusinessIndustryID = 1,
+                BusinessIndustryID = BusinessIndustryEnum.Computer,
                 Address = "Sample Address",
                 City = "Sample City",
                 UserWhoAddedID = 1,

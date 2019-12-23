@@ -11,7 +11,7 @@ namespace CustomerRelationshipManager.Models
     {
         public int ID { get; set; }
         [ForeignKey("BusinessIndustry"), Display(Name="Business Industry")]
-        public int BusinessIndustryID { get; set; }
+        public BusinessIndustryEnum BusinessIndustryID { get; set; }
         [ForeignKey("UserWhoAdded")]
         public int UserWhoAddedID { get; set; }
         [Required, MaxLength(50)]

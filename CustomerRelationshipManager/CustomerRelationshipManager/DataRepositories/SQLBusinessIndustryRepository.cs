@@ -25,7 +25,7 @@ namespace CustomerRelationshipManager.DataRepositories
 
         public BusinessIndustry Delete(int ID)
         {
-            BusinessIndustry businessIndustry = _context.BusinessIndustries.FirstOrDefault(b => b.ID == ID);
+            BusinessIndustry businessIndustry = _context.BusinessIndustries.FirstOrDefault(b => (int)b.ID == ID);
 
             if (businessIndustry != null)
             {
@@ -46,7 +46,7 @@ namespace CustomerRelationshipManager.DataRepositories
 
         public BusinessIndustry Get(int ID)
         {
-            return _context.BusinessIndustries.FirstOrDefault(b => b.ID == ID);
+            return _context.BusinessIndustries.FirstOrDefault(b => (int)b.ID == ID);
         }
 
         public IEnumerable<BusinessIndustry> GetAll()
