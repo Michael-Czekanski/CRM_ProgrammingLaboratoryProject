@@ -58,9 +58,10 @@ namespace CustomerRelationshipManager.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Logout()
         {
-            return View();
+            HttpContext.Session.Clear();
+            return RedirectToAction("index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
