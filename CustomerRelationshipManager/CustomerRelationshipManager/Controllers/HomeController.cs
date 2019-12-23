@@ -68,6 +68,18 @@ namespace CustomerRelationshipManager.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Register(User model)
+        {
+            if(ModelState.IsValid)
+            {
+                _userRepository.Add(model);
+                return RedirectToAction("signin");
+            }
+
+            return View(model);
+        }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
