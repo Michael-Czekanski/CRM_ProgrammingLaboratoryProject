@@ -49,6 +49,10 @@ namespace CustomerRelationshipManager.Controllers
                 {
                     return BadRequest(new { message = "Username or password is incorrect" });
                 }
+                else if(user.IsDeleted == true)
+                {
+                    return BadRequest(new { message = "Username or password is incorrect" });
+                }
                 string token = tokenProvider.ProvideToken(user);
                 HttpContext.Session.Set("JWT", Encoding.ASCII.GetBytes(token));
                 HttpContext.Session.Set("UserID", BitConverter.GetBytes(user.ID)); 
