@@ -5,17 +5,18 @@
     ViewData["Title"] = "Edit business note";
 }
 
-<form method="post" asp-controller="businessnotes" asp-action="edit">
-    <input hidden asp-for="ID" />
-    <input hidden asp-for="CompanyID" />
-    <input hidden asp-for="UserWhoAddedID" />
-    <input hidden asp-for="IsDeleted" />
+    <form method="post" asp-controller="businessnotes" asp-action="edit">
+        <input hidden asp-for="ID" />
+        <input hidden asp-for="CompanyID" />
+        <input hidden asp-for="UserWhoAddedID" />
+        <input hidden asp-for="IsDeleted" />
 
-    <div>
-        <label asp-for="Content"></label>
-        <textarea asp-for="Content"></textarea>
-        <span asp-validation-for="Content"></span>
-    </div>
+        <div>
+            <label asp-for="Content"></label>
+            <textarea asp-for="Content"></textarea>
+            <span asp-validation-for="Content"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-danger" type="button" asp-controller="BusinessNotes" asp-action="Index">Cancel</a>
+    </form>
