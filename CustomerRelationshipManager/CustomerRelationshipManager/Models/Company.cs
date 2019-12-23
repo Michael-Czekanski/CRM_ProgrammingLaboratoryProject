@@ -10,8 +10,8 @@ namespace CustomerRelationshipManager.Models
     public class Company
     {
         public int ID { get; set; }
-        [ForeignKey("BusinessIndustry"), Display(Name="Business Industry")]
-        public BusinessIndustryEnum BusinessIndustryID { get; set; }
+        [Required, ForeignKey("BusinessIndustry"), Display(Name="Business Industry")]
+        public BusinessIndustryEnum? BusinessIndustryID { get; set; }
         [ForeignKey("UserWhoAdded")]
         public int UserWhoAddedID { get; set; }
         [Required, MaxLength(50)]
