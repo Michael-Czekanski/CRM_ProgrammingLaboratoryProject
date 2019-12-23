@@ -1,0 +1,46 @@
+﻿@model ContactPerson
+
+@{
+    ViewData["Title"] = "Edit contact person";
+}
+
+    <form method="post" asp-controller="contactpeople" asp-action="edit">
+        <input hidden asp-for="CompanyID" />
+        <input hidden asp-for="UserWhoAddedID" />
+        <input hidden asp-for="ID" />
+        <input hidden asp-for="IsDeleted" />
+
+        <div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Surname"></label>
+            <input asp-for="Surname" />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="TelephoneNum"></label>
+            <input asp-for="TelephoneNum" />
+            <span asp-validation-for="TelephoneNum" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Position"></label>
+            <input asp-for="Position" />
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+
+
+        <!-- Summary -->
+
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+    </form>
