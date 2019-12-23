@@ -62,6 +62,12 @@ namespace CustomerRelationshipManager.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
