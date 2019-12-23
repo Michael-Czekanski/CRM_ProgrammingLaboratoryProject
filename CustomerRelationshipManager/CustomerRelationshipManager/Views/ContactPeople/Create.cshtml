@@ -40,5 +40,7 @@
         <div class="text-danger" asp-validation-summary="All"></div>
         <div>
             <button class="btn btn-primary" type="submit">Create</button>
+            <a class="btn btn-danger" type="button" 
+               asp-controller="Companies" asp-action="Details" asp-route-ID="@Model.CompanyID">Cancel</a>
         </div>
     </form>
