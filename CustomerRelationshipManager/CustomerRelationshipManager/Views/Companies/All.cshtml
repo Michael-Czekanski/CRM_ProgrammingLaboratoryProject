@@ -31,10 +31,10 @@
                 <a asp-controller="Companies" asp-action="Edit" asp-route-ID="@company.ID" class="btn btn-primary">Edit</a>
                 <a asp-controller="Companies" asp-action="Delete" asp-route-ID="@company.ID" class="btn btn-danger">Delete</a>
                 <a asp-controller="BusinessNotes" asp-action="Create" asp-route-CompanyID="@company.ID" class="btn btn-secondary">
-                    Create business note
+                    Add <b>Business Note</b>
                 </a>
                 <a asp-controller="ContactPeople" asp-action="Create" asp-route-CompanyID="@company.ID" class="btn btn-secondary">
-                    Add contact person
+                    Add <b>Contact Person</b>
                 </a>
             </td>
         </tr>
