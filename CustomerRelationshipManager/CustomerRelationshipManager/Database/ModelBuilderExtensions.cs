@@ -13,9 +13,9 @@ namespace CustomerRelationshipManager.Database
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            foreach(RoleEnum role in Enum.GetValues(typeof(RoleEnum)))
+            foreach (RoleEnum role in Enum.GetValues(typeof(RoleEnum)))
             {
-                modelBuilder.Entity<Role>().HasData( new Role() { ID = role, Name = role.ToString() });
+                modelBuilder.Entity<Role>().HasData(new Role() { ID = role, Name = role.ToString() });
             }
 
             modelBuilder.Entity<User>().HasData(new User()
@@ -30,11 +30,12 @@ namespace CustomerRelationshipManager.Database
                 Surname = "Ross"
             });
 
-            modelBuilder.Entity<BusinessIndustry>().HasData(new BusinessIndustry()
+            foreach (BusinessIndustryEnum businessIndustry in Enum.GetValues(typeof(BusinessIndustryEnum)))
             {
-                ID = 1,
-                Name = "IT"
-            });
+                modelBuilder.Entity<BusinessIndustry>()
+                    .HasData(new BusinessIndustry() { ID = businessIndustry, Name = businessIndustry.ToString() });
+            }
+
 
             modelBuilder.Entity<Company>().HasData(new Company()
             {
