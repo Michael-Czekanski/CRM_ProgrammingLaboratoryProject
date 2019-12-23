@@ -75,8 +75,13 @@ namespace CustomerRelationshipManager.Controllers
 
             return View(model);
         }
-       
 
-        
+        [HttpGet]
+        public IActionResult Edit(int ID)
+        {
+            ContactPerson model = _contactPersonRepository.Get(ID);
+            return View(model);
+        }
+
     }
 }
