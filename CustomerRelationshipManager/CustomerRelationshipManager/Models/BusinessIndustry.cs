@@ -6,6 +6,28 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Models
 {
+    public enum BusinessIndustryEnum
+    {
+        Aerospace,
+        Transport,
+        Computer,
+        Telecommunication,
+        Agriculture,
+        Construction,
+        Education,
+        Pharmaceutical,
+        Food,
+        HealthCare,
+        Hospitality,
+        Entertainment,
+        NewsMedia,
+        Energy,
+        Manufacturing,
+        Music,
+        Mining,
+        WorldwideWeb,
+        Electronics
+    }
     public class BusinessIndustry
     {
         public int ID { get; set; }
