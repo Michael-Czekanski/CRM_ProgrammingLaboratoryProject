@@ -91,5 +91,19 @@ namespace CustomerRelationshipManager.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult AccountDetails()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                int loggedInUserID;
+                UserManagementHelper.TryGetLoggedUserID(HttpContext, out loggedInUserID);
+
+                User user = _userRepository.Get(loggedInUserID);
+                _userRepository.GetAllAddedByUser(user);
+                return View(user);
+            }
+            return RedirectToAction("SignIn", "Home");
+        }
     }
 }
