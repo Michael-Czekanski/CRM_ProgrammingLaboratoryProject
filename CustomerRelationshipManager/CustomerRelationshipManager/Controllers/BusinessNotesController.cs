@@ -1,4 +1,5 @@
-﻿using CustomerRelationshipManager.DataRepositories;
+﻿using CustomerRelationshipManager.CustomAttributes;
+using CustomerRelationshipManager.DataRepositories;
 using CustomerRelationshipManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Controllers
 {
+    [Authorize("Admin", "Moderator", "Normal")]
     public class BusinessNotes: Controller
     {
         private readonly IBusinessNoteRepository _businessNoteRepository;

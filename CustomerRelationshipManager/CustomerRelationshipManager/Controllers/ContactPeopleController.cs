@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Controllers
 {
+    [CustomAttributes.Authorize("Admin", "Moderator", "Normal")]
     public class ContactPeopleController: Controller
     {
         private readonly IContactPersonRepository _contactPersonRepository;

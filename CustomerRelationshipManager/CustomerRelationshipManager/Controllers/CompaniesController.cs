@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Controllers
 {
-    [Authorize]
+    [CustomAttributes.Authorize("Admin", "Moderator", "Normal")]
     public class CompaniesController: Controller
     {
         private ICompanyRepository _companyRepository;
