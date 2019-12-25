@@ -27,7 +27,7 @@ namespace CustomerRelationshipManager.Controllers
 
         public IActionResult All()
         {
-            IEnumerable <BusinessNote> model = _businessNoteRepository.GetAll().ToList();
+            IEnumerable <BusinessNote> model = _businessNoteRepository.GetAll().Where(b => b.IsDeleted == false).ToList();
             foreach(BusinessNote businessNote in model)
             {
                 _businessNoteRepository.FillCompanyNavProperty(businessNote);

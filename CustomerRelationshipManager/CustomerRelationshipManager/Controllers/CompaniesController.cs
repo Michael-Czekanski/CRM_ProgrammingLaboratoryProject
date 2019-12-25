@@ -27,7 +27,7 @@ namespace CustomerRelationshipManager.Controllers
 
         public IActionResult All(int ?page, BusinessIndustryEnum? businessIndustryID, DateTime? addedAfter, DateTime? addedBefore)
         {
-            IEnumerable<Company> companies = _companyRepository.GetAll();
+            IEnumerable<Company> companies = _companyRepository.GetAll().Where(c => c.IsDeleted == false);
             ViewBag.BusinessIndustryFilter = businessIndustryID;
             ViewBag.AddedAfterFilter = addedAfter;
             ViewBag.AddedBeforeFilter = addedBefore;

@@ -34,7 +34,7 @@ namespace CustomerRelationshipManager.Controllers
 
         public ViewResult All(int? page)
         {
-            return View(_userRepository.GetAll().ToPagedList(page?? 1, pageSize));
+            return View(_userRepository.GetAll().Where(u => u.IsDeleted == false).ToPagedList(page?? 1, pageSize));
         }
 
         public IActionResult Details(int? ID)

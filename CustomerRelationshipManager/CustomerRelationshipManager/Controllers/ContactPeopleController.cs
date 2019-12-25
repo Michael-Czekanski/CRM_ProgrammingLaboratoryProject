@@ -26,7 +26,7 @@ namespace CustomerRelationshipManager.Controllers
 
         public IActionResult All(string surnameSearchString)
         {
-            IEnumerable<ContactPerson> model = _contactPersonRepository.GetAll();
+            IEnumerable<ContactPerson> model = _contactPersonRepository.GetAll().Where(c => c.IsDeleted == false);
             if (!String.IsNullOrEmpty(surnameSearchString))
             {
                 model = model.Where(cp => cp.Surname == surnameSearchString);
