@@ -47,11 +47,11 @@ namespace CustomerRelationshipManager.Controllers
                 User user = _userRepository.Authenticate(model.Login, model.Password);
                 if (user == null)
                 {
-                    return BadRequest(new { message = "Username or password is incorrect" });
+                    return new ObjectResult("Username or password is incorrect");
                 }
                 else if(user.IsDeleted == true)
                 {
-                    return BadRequest(new { message = "Username or password is incorrect" });
+                    return new ObjectResult("Username or password is incorrect");
                 }
                 string token = tokenProvider.ProvideToken(user);
                 HttpContext.Session.Set("JWT", Encoding.ASCII.GetBytes(token));
