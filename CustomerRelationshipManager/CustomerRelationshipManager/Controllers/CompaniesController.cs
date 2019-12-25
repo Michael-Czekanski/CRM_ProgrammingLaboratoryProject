@@ -28,9 +28,12 @@ namespace CustomerRelationshipManager.Controllers
         public IActionResult All(int ?page, BusinessIndustryEnum? businessIndustryID)
         {
             IEnumerable<Company> companies = _companyRepository.GetAll();
-            if(businessIndustryID != null)
+            ViewBag.BusinessIndustryFilter = null;
+
+            if (businessIndustryID != null)
             {
                 companies = companies.Where(c => c.BusinessIndustryID == businessIndustryID);
+                ViewBag.BusinessIndustryFilter = businessIndustryID;
             }
 
             int pageSize = 2;
