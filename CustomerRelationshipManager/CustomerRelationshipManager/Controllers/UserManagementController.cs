@@ -57,13 +57,13 @@ namespace CustomerRelationshipManager.Controllers
                     case RoleEnum.Admin:
                         if (!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
                         {
-                            return RedirectToAction("NoPermission", "Dashboard");
+                            return new UnauthorizedObjectResult("No permission");
                         }
                         break;
                     case RoleEnum.Moderator:
                         if (!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
                         {
-                            return RedirectToAction("NoPermission", "Dashboard");
+                            return new UnauthorizedObjectResult("No permission");
                         }
                         break;
                 }
@@ -106,12 +106,12 @@ namespace CustomerRelationshipManager.Controllers
                 {
                     case RoleEnum.Admin:
                         // You can't edit admin
-                        return RedirectToAction("NoPermission", "Dashboard");
+                        return new UnauthorizedObjectResult("No permission");
                     case RoleEnum.Moderator:
                         // If you are not admin, you can't edit moderator
                         if (!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
                         {
-                            return RedirectToAction("NoPermission", "Dashboard");
+                            return new UnauthorizedObjectResult("No permission");
                         }
                         break;
                     case RoleEnum.Normal:
@@ -119,7 +119,7 @@ namespace CustomerRelationshipManager.Controllers
                         if ((!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
                             && (!User.HasClaim(ClaimTypes.Role, RoleEnum.Moderator.ToString())))
                         {
-                            return RedirectToAction("NoPermission", "Dashboard");
+                            return new UnauthorizedObjectResult("No permission");
                         }
                         break;
                 }
@@ -154,12 +154,12 @@ namespace CustomerRelationshipManager.Controllers
                     {
                         case RoleEnum.Admin:
                             // You can't edit admin
-                            return RedirectToAction("NoPermission", "Dashboard");
+                            return new UnauthorizedObjectResult("No permission");
                         case RoleEnum.Moderator:
                             // If you are not admin, you can't edit moderator
                             if (!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
                             {
-                                return RedirectToAction("NoPermission", "Dashboard");
+                                return new UnauthorizedObjectResult("No permission");
                             }
                             break;
                         case RoleEnum.Normal:
@@ -167,7 +167,7 @@ namespace CustomerRelationshipManager.Controllers
                             if ((!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
                                 && (!User.HasClaim(ClaimTypes.Role, RoleEnum.Moderator.ToString())))
                             {
-                                return RedirectToAction("NoPermission", "Dashboard");
+                                return new UnauthorizedObjectResult("No permission");
                             }
                             break;
                     }
@@ -199,7 +199,7 @@ namespace CustomerRelationshipManager.Controllers
             if(userToDelete.RoleID == RoleEnum.Admin)
             {
                 // You can't delete admin
-                return RedirectToAction("NoPermission", "Dashboard");
+                return new UnauthorizedObjectResult("No permission");
             }
             _userRepository.Delete(ID);
             return RedirectToAction("All");

@@ -28,7 +28,7 @@ namespace CustomerRelationshipManager.CustomAttributes
                 }
                 if (!flagClaim)
                 {
-                    context.Result = new RedirectResult("~/Dashboard/NoPermission");
+                    context.Result = new UnauthorizedObjectResult("No permission");
                 }
             }
             else
