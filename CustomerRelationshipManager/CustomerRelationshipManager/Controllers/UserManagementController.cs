@@ -37,6 +37,12 @@ namespace CustomerRelationshipManager.Controllers
             return View(_userRepository.GetAll().Where(u => u.IsDeleted == false).ToPagedList(page?? 1, pageSize));
         }
 
+        [CustomAttributes.Authorize("Admin")]
+        public IActionResult ShowDeleted(int? page)
+        {
+            return View(_userRepository.GetAll().Where(u => u.IsDeleted == true).ToPagedList(page ?? 1, pageSize));
+        }
+
         public IActionResult Details(int? ID)
         {
             User userDetailsWithEmptyNavProp = _userRepository.Get(ID ?? 1);
