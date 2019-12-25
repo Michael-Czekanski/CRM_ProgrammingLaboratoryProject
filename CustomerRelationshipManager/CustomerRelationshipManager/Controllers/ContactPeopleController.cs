@@ -24,9 +24,15 @@ namespace CustomerRelationshipManager.Controllers
             return RedirectToAction("all");
         }
 
-        public IActionResult All()
+        public IActionResult All(string surnameSearchString)
         {
-            IEnumerable<ContactPerson> model = _contactPersonRepository.GetAll().ToList();
+            IEnumerable<ContactPerson> model = _contactPersonRepository.GetAll();
+            if (!String.IsNullOrEmpty(surnameSearchString))
+            {
+                model = model.Where(cp => cp.Surname == surnameSearchString);
+            }
+            model = model.ToList();
+
             foreach (ContactPerson contactPerson in model)
             {
                 _contactPersonRepository.FillCompanyNavProperty(contactPerson);
