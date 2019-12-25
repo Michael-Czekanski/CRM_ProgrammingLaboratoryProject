@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CustomerRelationshipManager.Controllers
 {
-    [Authorize]
+    [CustomAttributes.Authorize("Admin", "Moderator")]
     public class UserManagementController: Controller
     {
         private IUserRepository _userRepository;
@@ -32,20 +33,35 @@ namespace CustomerRelationshipManager.Controllers
             return View(_userRepository.GetAll());
         }
 
-        public ViewResult Details(int? ID)
+        public IActionResult Details(int? ID)
         {
             User userWithEmptyNavProp = _userRepository.Get(ID ?? 1);
+            switch (userWithEmptyNavProp.RoleID)
+            {
+                case RoleEnum.Admin:
+                    if(!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                    {
+                        return RedirectToAction("NoPermission", "Dashboard");
+                    }
+                    break;
+                case RoleEnum.Moderator:
+                    if (!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                    {
+                        return RedirectToAction("NoPermission", "Dashboard");
+                    }
+                    break;
+            }
             User userWithFilledNavProp = _userRepository.GetAllAddedByUser(userWithEmptyNavProp);
             return View(userWithFilledNavProp);
         }
 
-        [HttpGet]
+        [HttpGet, CustomAttributes.Authorize("Admin")]
         public ViewResult Create()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, CustomAttributes.Authorize("Admin")]
         public IActionResult Create(User user)
         {
             if(ModelState.IsValid)
@@ -58,16 +74,51 @@ namespace CustomerRelationshipManager.Controllers
         }
 
         [HttpGet]
-        public ViewResult Edit(int ID)
+        public IActionResult Edit(int ID)
         {
-            User user = _userRepository.Get(ID);
+            User userToEdit = _userRepository.Get(ID);
+
+            byte[] loggedInUserIDBytes;
+            int loggedInUserID = -1;
+            if (HttpContext.Session.TryGetValue("UserID", out loggedInUserIDBytes))
+            {
+                loggedInUserID = BitConverter.ToInt32(loggedInUserIDBytes, 0);
+            }
+
+            // Allow user to edit himself without checking his role
+            if(loggedInUserID != userToEdit.ID)
+            {
+                switch (userToEdit.RoleID)
+                {
+                    case RoleEnum.Admin:
+                        // You can't edit admin
+                        return RedirectToAction("NoPermission", "Dashboard");
+                    case RoleEnum.Moderator:
+                        // If you are not admin, you can't edit moderator
+                        if (!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                        {
+                            return RedirectToAction("NoPermission", "Dashboard");
+                        }
+                        break;
+                    case RoleEnum.Normal:
+                        // If you are not admin or moderator, you can't edit normal user
+                        if ((!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                            && (!User.HasClaim(ClaimTypes.Role, RoleEnum.Moderator.ToString())))
+                        {
+                            return RedirectToAction("NoPermission", "Dashboard");
+                        }
+                        break;
+                }
+            }
+            
             EditUserViewModel model = new EditUserViewModel()
             {
-                ID = user.ID,
-                Name = user.Name,
-                Surname = user.Surname,
-                DateOfBirth = user.DateOfBirth,
-                RoleID = user.RoleID
+                ID = userToEdit.ID,
+                Name = userToEdit.Name,
+                Surname = userToEdit.Surname,
+                DateOfBirth = userToEdit.DateOfBirth,
+                RoleID = userToEdit.RoleID,
+                IsDeleted = userToEdit.IsDeleted
             };
             return View(model);
         }
@@ -77,13 +128,52 @@ namespace CustomerRelationshipManager.Controllers
         {
             if(ModelState.IsValid)
             {
-                User user = _userRepository.Get(model.ID);
-                user.Name = model.Name;
-                user.Surname = model.Surname;
-                user.DateOfBirth = model.DateOfBirth;
-                user.RoleID = model.RoleID;
+                User userToEdit = _userRepository.Get(model.ID);
 
-                _userRepository.Edit(user);
+                byte[] loggedInUserIDBytes;
+                int loggedInUserID = -1;
+                if (HttpContext.Session.TryGetValue("UserID", out loggedInUserIDBytes))
+                {
+                    loggedInUserID = BitConverter.ToInt32(loggedInUserIDBytes, 0);
+                }
+
+                // Allow user to edit himself without checking his role
+                if (loggedInUserID != userToEdit.ID)
+                {
+                    switch (userToEdit.RoleID)
+                    {
+                        case RoleEnum.Admin:
+                            // You can't edit admin
+                            return RedirectToAction("NoPermission", "Dashboard");
+                        case RoleEnum.Moderator:
+                            // If you are not admin, you can't edit moderator
+                            if (!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                            {
+                                return RedirectToAction("NoPermission", "Dashboard");
+                            }
+                            break;
+                        case RoleEnum.Normal:
+                            // If you are not admin or moderator, you can't edit normal user
+                            if ((!User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                                && (!User.HasClaim(ClaimTypes.Role, RoleEnum.Moderator.ToString())))
+                            {
+                                return RedirectToAction("NoPermission", "Dashboard");
+                            }
+                            break;
+                    }
+                }
+                    
+                userToEdit.Name = model.Name;
+                userToEdit.Surname = model.Surname;
+                userToEdit.DateOfBirth = model.DateOfBirth;
+                if (User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                {
+                    userToEdit.RoleID = model.RoleID;
+                    userToEdit.IsDeleted = model.IsDeleted;
+                }
+                
+
+                _userRepository.Edit(userToEdit);
                 return RedirectToAction("All");
 
             }
@@ -92,8 +182,15 @@ namespace CustomerRelationshipManager.Controllers
             return View();
         }
 
+        [CustomAttributes.Authorize("Admin")]
         public IActionResult Delete(int ID)
         {
+            User userToDelete = _userRepository.Get(ID);
+            if(userToDelete.RoleID == RoleEnum.Admin)
+            {
+                // You can't delete admin
+                return RedirectToAction("NoPermission", "Dashboard");
+            }
             _userRepository.Delete(ID);
             return RedirectToAction("All");
         }

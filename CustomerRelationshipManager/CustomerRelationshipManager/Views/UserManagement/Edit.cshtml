@@ -6,9 +6,6 @@
 
     <form asp-controller="UserManagement" asp-action="Edit" method="post">
         <input hidden asp-for="ID" />
-        <input hidden asp-for="Name" />
-        <input hidden asp-for="Surname" />
-        <input hidden asp-for="DateOfBirth" />
 
         <div>
             <label asp-for="Name"></label>
@@ -28,12 +25,35 @@
             <span asp-validation-for="DateOfBirth" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="RoleID"></label>
-            <select asp-for="RoleID" asp-items="@Html.GetEnumSelectList<RoleEnum>()">
-                <option value="">Please select option</option>
-            </select>
-        </div>
+        <!-- Don't allow moderator to edit roles-->
+        @if (User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+        {
+            <div>
+                <label asp-for="RoleID"></label>
+                <select asp-for="RoleID" asp-items="@Html.GetEnumSelectList<RoleEnum>()">
+                    <option value="">Please select option</option>
+                </select>
+            </div>
+        }
+        else
+        {
+            <input hidden asp-for="RoleID" />
+        }
+
+        <!-- Don't allow moderator to edit if user is deleted-->
+        @if (User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+        {
+            <div>
+                <label asp-for="IsDeleted"></label>
+                <input asp-for="IsDeleted" class="" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+        }
+        else
+        {
+            <input hidden asp-for="IsDeleted" />
+        }
+
 
         <div class="text-danger" asp-validation-summary="All"></div>
         <div>

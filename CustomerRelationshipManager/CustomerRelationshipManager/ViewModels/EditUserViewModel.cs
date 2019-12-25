@@ -20,6 +20,8 @@ namespace CustomerRelationshipManager.ViewModels
         public string Surname { get; set; }
         [Required(ErrorMessage = "Date of birth is required"), DataType(DataType.Date), Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }
+        public bool IsDeleted { get; set; }
+
 
     }
 }
