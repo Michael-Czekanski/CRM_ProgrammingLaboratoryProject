@@ -1,4 +1,5 @@
 ﻿using CustomerRelationshipManager.DataRepositories;
+using CustomerRelationshipManager.Helpers;
 using CustomerRelationshipManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -50,11 +51,10 @@ namespace CustomerRelationshipManager.Controllers
             }
             ContactPerson model = new ContactPerson();
             model.CompanyID = CompanyID;
-            byte[] userWhoAddedIDBytes;
+
             int userWhoAddedID;
-            if (HttpContext.Session.TryGetValue("UserID", out userWhoAddedIDBytes))
+            if (UserManagementHelper.TryGetLoggedUserID(HttpContext, out userWhoAddedID))
             {
-                userWhoAddedID = BitConverter.ToInt32(userWhoAddedIDBytes, 0);
                 model.UserWhoAddedID = userWhoAddedID;
             }
             else

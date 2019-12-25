@@ -87,15 +87,11 @@ namespace CustomerRelationshipManager.Controllers
         {
             User userToEdit = _userRepository.Get(ID);
 
-            byte[] loggedInUserIDBytes;
             int loggedInUserID = -1;
-            if (HttpContext.Session.TryGetValue("UserID", out loggedInUserIDBytes))
-            {
-                loggedInUserID = BitConverter.ToInt32(loggedInUserIDBytes, 0);
-            }
+            UserManagementHelper.TryGetLoggedUserID(HttpContext, out loggedInUserID);
 
             // Allow user to edit himself without checking his role
-            if(loggedInUserID != userToEdit.ID)
+            if (loggedInUserID != userToEdit.ID)
             {
                 switch (userToEdit.RoleID)
                 {
@@ -139,12 +135,8 @@ namespace CustomerRelationshipManager.Controllers
             {
                 User userToEdit = _userRepository.Get(model.ID);
 
-                byte[] loggedInUserIDBytes;
                 int loggedInUserID = -1;
-                if (HttpContext.Session.TryGetValue("UserID", out loggedInUserIDBytes))
-                {
-                    loggedInUserID = BitConverter.ToInt32(loggedInUserIDBytes, 0);
-                }
+                UserManagementHelper.TryGetLoggedUserID(HttpContext, out loggedInUserID);
 
                 // Allow user to edit himself without checking his role
                 if (loggedInUserID != userToEdit.ID)

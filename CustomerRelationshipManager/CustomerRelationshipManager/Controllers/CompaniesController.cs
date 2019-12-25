@@ -1,4 +1,5 @@
 ﻿using CustomerRelationshipManager.DataRepositories;
+using CustomerRelationshipManager.Helpers;
 using CustomerRelationshipManager.Models;
 using CustomerRelationshipManager.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -46,11 +47,12 @@ namespace CustomerRelationshipManager.Controllers
                 BusinessIndustries = _businessIndustryRepository.GetAll().ToList()
             };
 
-            byte[] userWhoAddedIDBytes;
+
+            
             int userWhoAddedID;
-            if (HttpContext.Session.TryGetValue("UserID", out userWhoAddedIDBytes))
+            
+            if (UserManagementHelper.TryGetLoggedUserID(HttpContext, out userWhoAddedID))
             {
-                userWhoAddedID = BitConverter.ToInt32(userWhoAddedIDBytes, 0);
                 model.UserWhoAddedID = userWhoAddedID;
             }
             return View(model);
