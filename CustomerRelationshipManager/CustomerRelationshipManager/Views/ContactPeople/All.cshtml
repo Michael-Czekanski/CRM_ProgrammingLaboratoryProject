@@ -4,6 +4,13 @@
     ViewData["Title"] = "All contact people";
 }
 
+<form asp-controller="ContactPeople" asp-action="All">
+    <p>
+        Surname: <input type="text" name="surnameSearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table table-hover">
     <tr>
         <th>ID</th>
