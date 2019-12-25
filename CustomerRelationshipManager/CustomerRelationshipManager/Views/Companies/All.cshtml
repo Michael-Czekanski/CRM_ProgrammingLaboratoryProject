@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Company>
+﻿@model IPagedList<Company>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
 @{
     ViewData["Title"] = "All Companies";
@@ -9,9 +11,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>BusinessIndustry</th>
-        <th>NIP</th>
         <th>City</th>
-        <th>Address</th>
         <th>Date Added</th>
         <th>Operations</th>
     </tr>
@@ -21,10 +21,8 @@
         <tr>
             <td>@company.ID</td>
             <td>@company.Name</td>
-            <td>@company.BusinessIndustry.Name</td>
-            <td>@company.NIP</td>
+            <td>@company.BusinessIndustryID.ToString()</td>
             <td>@company.City</td>
-            <td>@company.Address</td>
             <td>@company.DateAdded</td>
             <td>
                 <a asp-controller="Companies" asp-action="Details" asp-route-ID="@company.ID" class="btn btn-primary">Details</a>
@@ -40,3 +38,8 @@
         </tr>
     }
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("All", "Companies", new { page }))

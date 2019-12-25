@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace CustomerRelationshipManager.Controllers
 {
@@ -23,14 +24,13 @@ namespace CustomerRelationshipManager.Controllers
             _businessIndustryRepository = businessIndustryRepository;
         }
 
-        public IActionResult All()
+        public IActionResult All(int ?page)
         {
-            IEnumerable<Company> companies = _companyRepository.GetAll().ToList();
-            foreach(Company company in companies)
-            {
-                _companyRepository.FillBusinessIndustryNavProperty(company);
-            }
-            return View(companies);
+            IEnumerable<Company> companies = _companyRepository.GetAll();
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            return View(companies.ToPagedList(pageNumber, pageSize));
         }
 
         public IActionResult Index()
