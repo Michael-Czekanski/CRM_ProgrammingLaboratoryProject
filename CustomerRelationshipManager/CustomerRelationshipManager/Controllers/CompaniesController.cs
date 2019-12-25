@@ -28,14 +28,13 @@ namespace CustomerRelationshipManager.Controllers
         public IActionResult All(int ?page, BusinessIndustryEnum? businessIndustryID, DateTime? addedAfter, DateTime? addedBefore)
         {
             IEnumerable<Company> companies = _companyRepository.GetAll();
-            ViewBag.BusinessIndustryFilter = null;
+            ViewBag.BusinessIndustryFilter = businessIndustryID;
             ViewBag.AddedAfterFilter = addedAfter;
             ViewBag.AddedBeforeFilter = addedBefore;
 
             if (businessIndustryID != null)
             {
                 companies = companies.Where(c => c.BusinessIndustryID == businessIndustryID);
-                ViewBag.BusinessIndustryFilter = businessIndustryID;
             }
             if(addedAfter != null)
             {
