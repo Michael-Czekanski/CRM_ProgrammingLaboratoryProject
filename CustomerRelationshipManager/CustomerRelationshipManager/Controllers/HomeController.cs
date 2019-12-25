@@ -73,6 +73,10 @@ namespace CustomerRelationshipManager.Controllers
         {
             if(ModelState.IsValid)
             {
+                if(_userRepository.GetAll().Where(u => u.Login == model.Login).FirstOrDefault() != null)
+                {
+                    return new ObjectResult("There is user with that login");
+                }
                 _userRepository.Add(model);
                 return RedirectToAction("signin");
             }
