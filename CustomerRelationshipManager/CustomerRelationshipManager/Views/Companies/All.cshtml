@@ -12,8 +12,16 @@
         <select asp-items="@Html.GetEnumSelectList<BusinessIndustryEnum>()" name="businessIndustryID">
             <option value="@null"></option>
         </select>
+
+        Added after
+        <input type="date" name="addedAfter" />
+
+        Added before
+        <input type="date" name="addedBefore" />
+
         <input type="submit" value="Filter" />
     </p>
+
 </form>
 
 <table class="table table-hover">
@@ -52,4 +60,8 @@
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("All", "Companies", new { page, businessIndustryID = ViewBag.BusinessIndustryFilter }))
+@Html.PagedListPager(Model, page => Url.Action("All", "Companies", 
+    new { page, 
+        businessIndustryID = ViewBag.BusinessIndustryFilter, 
+        addedAfter = ViewBag.AddedAfterFilter, 
+        addedBefore = ViewBag.AddedBeforeFilter }))
