@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace CustomerRelationshipManager.Controllers
 {
@@ -16,10 +17,12 @@ namespace CustomerRelationshipManager.Controllers
     public class UserManagementController: Controller
     {
         private IUserRepository _userRepository;
+        private readonly int pageSize;
 
         public UserManagementController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+            pageSize = 5;
         }
 
         
@@ -29,9 +32,9 @@ namespace CustomerRelationshipManager.Controllers
             return RedirectToAction("All");
         }
 
-        public ViewResult All()
+        public ViewResult All(int? page)
         {
-            return View(_userRepository.GetAll());
+            return View(_userRepository.GetAll().ToPagedList(page?? 1, pageSize));
         }
 
         public IActionResult Details(int? ID)
