@@ -25,15 +25,25 @@ namespace CustomerRelationshipManager.Controllers
             _businessIndustryRepository = businessIndustryRepository;
         }
 
-        public IActionResult All(int ?page, BusinessIndustryEnum? businessIndustryID)
+        public IActionResult All(int ?page, BusinessIndustryEnum? businessIndustryID, DateTime? addedAfter, DateTime? addedBefore)
         {
             IEnumerable<Company> companies = _companyRepository.GetAll();
             ViewBag.BusinessIndustryFilter = null;
+            ViewBag.AddedAfterFilter = addedAfter;
+            ViewBag.AddedBeforeFilter = addedBefore;
 
             if (businessIndustryID != null)
             {
                 companies = companies.Where(c => c.BusinessIndustryID == businessIndustryID);
                 ViewBag.BusinessIndustryFilter = businessIndustryID;
+            }
+            if(addedAfter != null)
+            {
+                companies = companies.Where(c => c.DateAdded > addedAfter);
+            }
+            if(addedBefore != null)
+            {
+                companies = companies.Where(c => c.DateAdded < addedBefore);
             }
 
             int pageSize = 2;
