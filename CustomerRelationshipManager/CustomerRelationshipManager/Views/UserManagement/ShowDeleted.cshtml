@@ -1,0 +1,35 @@
+﻿@model IPagedList<User>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Deleted Users";
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Role</th>
+        <th>Operations</th>
+    </tr>
+
+    @foreach (User user in Model)
+    {
+        <tr>
+            <td>@user.ID</td>
+            <td>@user.Name</td>
+            <td>@user.Surname</td>
+            <td>@user.RoleID</td>
+            <td>
+                <a asp-controller="UserManagement" asp-action="Details" asp-route-ID="@user.ID" class="btn btn-primary">Details</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("ShowDeleted", "UserManagement", new { page }))
