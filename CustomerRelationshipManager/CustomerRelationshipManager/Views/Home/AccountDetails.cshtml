@@ -1,0 +1,110 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Account Details";
+}
+
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Name</div>
+    <div class="col-sm-6 bg-light">@Model.Name</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Surname</div>
+    <div class="col-sm-6 bg-light">@Model.Surname</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Date of birth</div>
+    <div class="col-sm-6 bg-light">@Model.DateOfBirth</div>
+</div>
+<div class="row">
+    <div class="col-sm-6 bg-light text-secondary">Role</div>
+    <div class="col-sm-6 bg-light">@Model.RoleID</div>
+</div>
+
+
+<!-- All added companies -->
+<div class="row">
+    <button type="button" class="col-sm-12 btn-block btn-light text-secondary text-left"
+            data-toggle="collapse" data-target="#AddedCompanies">
+        Added Companies (Click)
+    </button>
+</div>
+
+<div class="collapse" id="AddedCompanies">
+    <table class="table table-hover table-secondary">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Business Industry</th>
+        </tr>
+
+        @foreach (Company addedCompany in Model.AddedCompanies)
+        {
+            <tr>
+                <td>@addedCompany.ID</td>
+                <td>@addedCompany.Name</td>
+                <td>@addedCompany.BusinessIndustry.Name</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- All added contact people-->
+
+<div class="row">
+    <button type="button" class="col-sm-12 btn-block btn-light text-secondary text-left"
+            data-toggle="collapse" data-target="#AddedContactPeople">
+        Added Contact People (Click)
+    </button>
+</div>
+
+<div class="collapse" id="AddedContactPeople">
+    <table class="table table-hover table-secondary">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Phone Number</th>
+            <th>Company</th>
+        </tr>
+
+        @foreach (ContactPerson addedContactPerson in Model.AddedContactPeople)
+        {
+            <tr>
+                <td>@addedContactPerson.ID</td>
+                <td>@addedContactPerson.Name</td>
+                <td>@addedContactPerson.Surname</td>
+                <td>@addedContactPerson.TelephoneNum</td>
+                <td>@addedContactPerson.Company.Name</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- All added business notes-->
+
+<div class="row">
+    <button type="button" class="col-sm-12 btn-block btn-light text-secondary text-left"
+            data-toggle="collapse" data-target="#AddedBusinessNotes">
+        Added Business Notes (Click)
+    </button>
+</div>
+
+<div class="collapse" id="AddedBusinessNotes">
+    <table class="table table-hover table-secondary">
+        <tr>
+            <th>ID</th>
+            <th>Content</th>
+            <th>Company</th>
+        </tr>
+
+        @foreach (BusinessNote businessNote in Model.BusinessNotes)
+        {
+            <tr>
+                <td>@businessNote.ID</td>
+                <td>@businessNote.Content</td>
+                <td>@businessNote.Company.Name</td>
+            </tr>
+        }
+    </table>
+</div>
