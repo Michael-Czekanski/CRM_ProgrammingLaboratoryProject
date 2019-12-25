@@ -6,6 +6,16 @@
     ViewData["Title"] = "All Companies";
 }
 
+<form asp-controller="Companies" asp-action="All">
+    <p>
+        Business Industry
+        <select asp-items="@Html.GetEnumSelectList<BusinessIndustryEnum>()" name="businessIndustryID">
+            <option value="@null"></option>
+        </select>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table table-hover">
     <tr>
         <th>ID</th>
