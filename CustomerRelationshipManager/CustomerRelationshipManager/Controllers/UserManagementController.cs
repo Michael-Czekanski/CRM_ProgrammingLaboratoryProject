@@ -1,4 +1,5 @@
 ﻿using CustomerRelationshipManager.DataRepositories;
+using CustomerRelationshipManager.Helpers;
 using CustomerRelationshipManager.Models;
 using CustomerRelationshipManager.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -35,24 +36,32 @@ namespace CustomerRelationshipManager.Controllers
 
         public IActionResult Details(int? ID)
         {
-            User userWithEmptyNavProp = _userRepository.Get(ID ?? 1);
-            switch (userWithEmptyNavProp.RoleID)
+            User userDetailsWithEmptyNavProp = _userRepository.Get(ID ?? 1);
+
+            int loggedInUserID = -1;
+            UserManagementHelper.TryGetLoggedUserID(HttpContext, out loggedInUserID);
+            
+            if(loggedInUserID != userDetailsWithEmptyNavProp.ID)
             {
-                case RoleEnum.Admin:
-                    if(!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
-                    {
-                        return RedirectToAction("NoPermission", "Dashboard");
-                    }
-                    break;
-                case RoleEnum.Moderator:
-                    if (!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
-                    {
-                        return RedirectToAction("NoPermission", "Dashboard");
-                    }
-                    break;
+                switch (userDetailsWithEmptyNavProp.RoleID)
+                {
+                    case RoleEnum.Admin:
+                        if (!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                        {
+                            return RedirectToAction("NoPermission", "Dashboard");
+                        }
+                        break;
+                    case RoleEnum.Moderator:
+                        if (!HttpContext.User.HasClaim(ClaimTypes.Role, RoleEnum.Admin.ToString()))
+                        {
+                            return RedirectToAction("NoPermission", "Dashboard");
+                        }
+                        break;
+                }
             }
-            User userWithFilledNavProp = _userRepository.GetAllAddedByUser(userWithEmptyNavProp);
-            return View(userWithFilledNavProp);
+            
+            User userDetailsWithFilledNavProp = _userRepository.GetAllAddedByUser(userDetailsWithEmptyNavProp);
+            return View(userDetailsWithFilledNavProp);
         }
 
         [HttpGet, CustomAttributes.Authorize("Admin")]
